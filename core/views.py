@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from core.models import Room, Booking
 from django.http import HttpResponse
 
@@ -25,7 +25,7 @@ def book_room(request):
         end_time = request.POST.get("end-time")
 
         try:
-            room = room.objects.get(number=room_number)
+            room = Room.objects.get(number=room_number)
         except ValueError:
             return HttpResponse(
                 "Wrong value or room number",
@@ -52,7 +52,7 @@ def booking_details(request, pk):
         booking = Booking.objects.get(id=pk)
         context = {
             "booking": booking
-        },
+        }
         return render(request, template_name="booking/booking_details.html", context=context)
     except Booking.DoesNotExist:
         return HttpResponse(
