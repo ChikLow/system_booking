@@ -3,14 +3,14 @@
     <form method="POST" action="{% url 'book-room' %}">
     {% csrf_token %}
         <label for="room-number">Room number:</label>
-        <input type="text" id="room-number" name="room-number"></input>
+        <input type="text" id="room-number" name="room-number" class="form-control"></input>
         <br>
         <label for="room-number">start time:</label>
-        <input type="datetime-local" id="start_time" name="start-time"></input>
+        <input type="datetime-local" id="start_time" name="start-time" class="form-control"></input>
         <br>
         <label for="room-number">end time:</label>
-        <input type="datetime-local" id="end_time" name="end-time"></input>
+        <input type="datetime-local" id="end_time" name="end-time" class="form-control"></input>
         <br>
-        <button type="submit">Book this room</button>
+        <button type="submit" class="btn btn-primary">Book this room</button>
     </form>
 {% endblock %}

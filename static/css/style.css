@@ -1,0 +1,14 @@
+body{
+    background-color: aliceblue;
+}
+
+.navbar{
+    border-bottom: 1.5px black solid;
+    background-color: white;
+}
+
+.room-list{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}

@@ -10,6 +10,7 @@ class Room(models.Model):
     number = models.IntegerField()
     location = models.TextField()
     level = models.CharField(max_length=3, choices=Level.choices)
+    image = models.ImageField(upload_to='room_images', null=True, blank=True)
 
     LEVEL_PRICES = {
         Level.STANDARD: 500,
