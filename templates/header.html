@@ -15,9 +15,18 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Rooms</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sign in</a>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout_page' %}">log out</a>
         </li>
+        {% else %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'login_page' %}">Sign in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">register</a>
+        </li>
+        {% endif %}
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

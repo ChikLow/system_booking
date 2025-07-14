@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <form method="POST" action="{% url 'book-room' %}">
+    <h1>Booking Room</h1>
+    <div class="card" style="width: 18rem;">
+        <img src="{{room.image.url}}" class="card-img-top" alt="image...">
+        <div class="card-body">
+            <h5 class="card-title">Room #{{ room.number }}</h5>
+            <p class="card-text">capacity: {{room.capacity}}</p>
+            <p class="card-text">Location: {{room.location}}</p>
+        </div>
+    </div>
+    <form method="POST" action="">
     {% csrf_token %}
-        <label for="room-number">Room number:</label>
-        <input type="text" id="room-number" name="room-number" class="form-control"></input>
-        <br>
+
         <label for="room-number">start time:</label>
         <input type="datetime-local" id="start_time" name="start-time" class="form-control"></input>
         <br>

@@ -1,13 +1,8 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from core.models import Room, Booking
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
-def index(request):
-    context = {
-        "render_string": "Hello, world!"
-    }
-
-    return render(request, template_name="booking/index.html", context=context)
 
 
 def room_list(request):
@@ -18,24 +13,15 @@ def room_list(request):
 
     return render(request, template_name="booking/room_list.html", context=context)
 
-def book_room(request):
+
+@login_required
+def book_room(request, room_id):
+
+    room = get_object_or_404(Room, id=room_id)
+
     if request.method == "POST":
-        room_number = request.POST.get("room-number")
         start_time = request.POST.get("start-time")
         end_time = request.POST.get("end-time")
-
-        try:
-            room = Room.objects.get(number=room_number)
-        except ValueError:
-            return HttpResponse(
-                "Wrong value or room number",
-                status = 400
-            )
-        except Room.DoesNotExist:
-            return HttpResponse(
-                "this room does not exist",
-                status = 404
-            )
         
         booking = Booking.objects.create(
             user = request.user,
@@ -45,7 +31,7 @@ def book_room(request):
         )
         return redirect('booking-details', pk=booking.id)
     else:
-        return render(request, template_name="booking/booking_form.html")
+        return render(request, template_name="booking/booking_form.html", context={"room": room})
     
 def booking_details(request, pk):
     try:

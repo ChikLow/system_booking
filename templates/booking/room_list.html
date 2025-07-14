@@ -11,7 +11,7 @@
             <h5 class="card-title">Room #{{ room.number }}</h5>
             <p class="card-text">capacity: {{room.capacity}}</p>
             <p class="card-text">Location: {{room.location}}</p>
-            <a href="#" class="btn btn-primary">Go to Booking</a>
+            <a href="{% url 'book-room' room.id %}" class="btn btn-primary">Go to Booking</a>
         </div>
     </div>
 {% endfor %}
